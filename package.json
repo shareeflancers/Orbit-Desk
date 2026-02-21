@@ -19,6 +19,7 @@
     "dependencies": {
         "@emotion/react": "^11.14.0",
         "@inertiajs/react": "^2.3.15",
+        "@mantine/colors-generator": "^8.3.15",
         "@mantine/core": "^8.3.15",
         "@mantine/hooks": "^8.3.15",
         "@mantine/notifications": "^8.3.15",

@@ -1,8 +1,19 @@
 import { createInertiaApp } from '@inertiajs/react';
 import { createRoot } from 'react-dom/client';
 import { MantineProvider } from '@mantine/core';
+import { ThemeProvider, useThemeColor } from './context/ThemeContext';
 import '@mantine/core/styles.css';
 import '../css/app.css';
+
+function AppShell({ App, props }) {
+    const { theme } = useThemeColor();
+
+    return (
+        <MantineProvider theme={theme}>
+            <App {...props} />
+        </MantineProvider>
+    );
+}
 
 createInertiaApp({
     resolve: (name) => {
@@ -11,9 +22,9 @@ createInertiaApp({
     },
     setup({ el, App, props }) {
         createRoot(el).render(
-            <MantineProvider>
-                <App {...props} />
-            </MantineProvider>
+            <ThemeProvider>
+                <AppShell App={App} props={props} />
+            </ThemeProvider>
         );
     },
 });
