@@ -2,7 +2,7 @@ import { createTheme } from '@mantine/core';
 import { generateColors } from '@mantine/colors-generator';
 import { generatePalette } from './paletteGenerator';
 
-export const DEFAULT_COLOR_HEX = '#4C6EF5'; // Indigo
+export const DEFAULT_COLOR_HEX = '#4f46e5'; // Landing Page Indigo
 export const DEFAULT_FONT_FAMILY = "'Instrument Sans', sans-serif";
 
 /**

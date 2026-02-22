@@ -27,7 +27,7 @@ export default function VerifyEmail() {
             <Head title="Verify Email — Orbit Desk" />
             <AuthLayout
                 title="Just one more step."
-                subtitle="We need to verify your email address to secure your account."
+                subtitle="We need to verify your email address to secure your new helpdesk account."
             >
                 <div className="flex flex-col items-center text-center">
 

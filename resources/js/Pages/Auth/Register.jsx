@@ -22,12 +22,12 @@ export default function Register() {
             <Head title="Create Account — Orbit Desk" />
             <AuthLayout
                 title="Join Orbit Desk."
-                subtitle="Create a new workspace and start managing your team's projects efficiently."
+                subtitle="Get started for free. Streamline your team's support emails and tickets today."
             >
                 <div>
                     <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Create an account</h2>
                     <p className="text-gray-500 font-medium mb-8">
-                        Sign up to get started with Orbit Desk today.
+                        Sign up to deploy your secure, enterprise-grade helpdesk.
                     </p>
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-5">

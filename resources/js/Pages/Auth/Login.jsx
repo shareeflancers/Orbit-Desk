@@ -21,12 +21,12 @@ export default function Login() {
             <Head title="Log in — Orbit Desk" />
             <AuthLayout
                 title="Welcome Back."
-                subtitle="Sign in to your Orbit Desk workspace to manage your projects and team."
+                subtitle="Sign in to Orbit Desk to manage your support tickets and streamline your workflow."
             >
                 <div>
                     <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Log in</h2>
                     <p className="text-gray-500 font-medium mb-8">
-                        Enter your credentials to access your account.
+                        Enter your credentials to securely access your helpdesk.
                     </p>
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-5">

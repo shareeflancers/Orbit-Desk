@@ -4,6 +4,7 @@ import {
 } from '@mantine/core';
 import { IconCheck } from '@tabler/icons-react';
 import { useThemeColor } from '../context/ThemeContext';
+import { DEFAULT_COLOR_HEX } from '../theme';
 
 function PalettePreviewRow({ label, color, isGradient = false }) {
     return (
@@ -46,12 +47,23 @@ export default function ThemeAdjustmentPanel({ opened, onClose }) {
                     <Text size="xs" fw={700} tt="uppercase" c="dimmed" mb="xs">
                         Primary Color Source
                     </Text>
-                    <ColorInput
-                        value={brandColor}
-                        onChange={setBrandColor}
-                        format="hex"
-                        radius="md"
-                    />
+                    <Group align="flex-start">
+                        <ColorInput
+                            value={brandColor}
+                            onChange={setBrandColor}
+                            format="hex"
+                            radius="md"
+                            style={{ flex: 1 }}
+                        />
+                        <UnstyledButton
+                            onClick={() => setBrandColor(DEFAULT_COLOR_HEX)}
+                            className="h-[36px] px-3 rounded-xl border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-colors flex items-center gap-2"
+                            title="Revert to Website Default"
+                        >
+                            <Box style={{ width: 14, height: 14, borderRadius: '50%', background: DEFAULT_COLOR_HEX }} />
+                            <Text size="xs" fw={600} c="dimmed">Reset</Text>
+                        </UnstyledButton>
+                    </Group>
                     <Text size="xs" c="dimmed" mt="xs">
                         Select a base color. A complete custom palette is generated automatically.
                     </Text>

@@ -75,9 +75,9 @@ export function generatePalette(hex) {
     const black = hslToHex(h, 15, 8);
     const white = '#FFFFFF';
 
-    const primaryGradient = `linear-gradient(135deg, ${lightSecondary} 0%, ${primaryDark} 100%)`;
+    const primaryGradient = `linear-gradient(135deg, ${primary} 0%, ${accent} 100%)`;
     const secondaryGradient = `linear-gradient(135deg, ${darkSecondary} 0%, ${lightPrimary} 100%)`;
-    const brandGradient = `linear-gradient(135deg, ${primary} 0%, ${primaryDark} 100%)`;
+    const brandGradient = `linear-gradient(135deg, ${primary} 0%, ${accent} 100%)`;
     const subtleGradient = `linear-gradient(135deg, ${surface} 0%, ${lightSecondary} 100%)`;
 
     return {
