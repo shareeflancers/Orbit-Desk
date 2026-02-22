@@ -1,24 +1,30 @@
-import { createTheme, DEFAULT_THEME } from '@mantine/core';
+import { createTheme } from '@mantine/core';
 import { generateColors } from '@mantine/colors-generator';
+import { generatePalette } from './paletteGenerator';
 
 export const DEFAULT_COLOR_HEX = '#4C6EF5'; // Indigo
+export const DEFAULT_FONT_FAMILY = "'Instrument Sans', sans-serif";
 
 /**
- * Build a full Mantine theme from any hex color.
- * Generates a 10-shade palette and sets it as the primary color.
+ * Build a full Mantine theme from any hex color and font.
+ * Generates a 10-shade Mantine palette AND our custom OD palette.
  */
 export function buildTheme(hex = DEFAULT_COLOR_HEX) {
-    const palette = generateColors(hex);
+    const mantinePalette = generateColors(hex);
+    const odPalette = generatePalette(hex);
 
-    return createTheme({
-        colors: {
-            brand: palette,
-        },
-        primaryColor: 'brand',
-        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-        headings: {
-            fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-        },
-        defaultRadius: 'md',
-    });
+    return {
+        mantineTheme: createTheme({
+            colors: {
+                brand: mantinePalette,
+            },
+            primaryColor: 'brand',
+            fontFamily: DEFAULT_FONT_FAMILY,
+            headings: {
+                fontFamily: DEFAULT_FONT_FAMILY,
+            },
+            defaultRadius: 'xl', // Matching the highly rounded UI aesthetic requested
+        }),
+        palette: odPalette,
+    };
 }
