@@ -3,8 +3,8 @@ import {
     Box, Divider, Paper
 } from '@mantine/core';
 import { IconCheck } from '@tabler/icons-react';
-import { useThemeColor } from '../context/ThemeContext';
-import { DEFAULT_COLOR_HEX } from '../theme';
+import { useThemeColor } from '../../context/ThemeContext';
+import { DEFAULT_COLOR_HEX } from '../../theme';
 
 function PalettePreviewRow({ label, color, isGradient = false }) {
     return (

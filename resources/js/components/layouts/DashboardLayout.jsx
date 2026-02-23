@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ActionIcon } from '@mantine/core';
 import { IconPalette, IconMenu2 } from '@tabler/icons-react';
 import Sidebar from './Sidebar';
-import ThemeAdjustmentPanel from './ThemeAdjustmentPanel';
+import ThemeAdjustmentPanel from '../themed/ThemeAdjustmentPanel';
 
 /**
  * DashboardLayout — full-page shell with a floating sidebar and removed header.

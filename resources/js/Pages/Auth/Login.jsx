@@ -1,8 +1,8 @@
 import { Head, Link } from '@inertiajs/react';
-import AuthLayout from '../../components/AuthLayout';
-import AuthInput from '../../components/AuthInput';
-import AuthPasswordInput from '../../components/AuthPasswordInput';
-import AuthButton from '../../components/AuthButton';
+import AuthLayout from '../../components/auth/AuthLayout';
+import AuthInput from '../../components/auth/AuthInput';
+import AuthPasswordInput from '../../components/auth/AuthPasswordInput';
+import AuthButton from '../../components/auth/AuthButton';
 import { IconMail } from '@tabler/icons-react';
 import { useState } from 'react';
 

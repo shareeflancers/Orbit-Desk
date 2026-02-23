@@ -6,7 +6,7 @@
         "build": "vite build",
         "dev": "vite",
         "serve": "php artisan serve",
-        "start": "npm run build && concurrently --names \"vite,laravel\" -c \"cyan,magenta\" \"npm run dev\" \"npm run serve\""
+        "start": "concurrently --names \"vite,laravel\" -c \"cyan,magenta\" \"npm run dev\" \"npm run serve\""
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",

@@ -1,9 +1,9 @@
 import { Head, Link } from '@inertiajs/react';
-import AuthLayout from '../../components/AuthLayout';
+import AuthLayout from '../../components/auth/AuthLayout';
 import { useState } from 'react';
 import { IconMailOpened } from '@tabler/icons-react';
-import AuthPinInput from '../../components/AuthPinInput';
-import AuthButton from '../../components/AuthButton';
+import AuthPinInput from '../../components/auth/AuthPinInput';
+import AuthButton from '../../components/auth/AuthButton';
 
 export default function VerifyEmail() {
     const [pin, setPin] = useState('');

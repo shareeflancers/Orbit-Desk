@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-import DashboardLayout from '../components/DashboardLayout';
+import DashboardLayout from '../components/layouts/DashboardLayout';
 
 export default function Dashboard() {
     return (
