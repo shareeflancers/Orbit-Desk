@@ -1,3 +1,4 @@
+import { router } from '@inertiajs/react';
 import { Tooltip, Text, Avatar } from '@mantine/core';
 import {
     IconHome2, IconTicket, IconUsers, IconSettings,
@@ -14,7 +15,7 @@ function NavItem({ icon: Icon, label, active, onClick }) {
             <button
                 onClick={onClick}
                 className={`
-                    flex items-center gap-3 w-full px-4 py-3 
+                    flex items-center gap-3 w-full px-4 py-3
                     rounded-2xl transition-all duration-300 ease-out
                     ${active ? 'font-semibold shadow-md translate-x-1' : 'font-medium hover:bg-white/10 hover:translate-x-1'}
                 `}
@@ -137,8 +138,7 @@ export default function Sidebar({
                     {/* Logout Button */}
                     <button
                         onClick={() => {
-                            onNavigate?.('logout');
-                            onCloseMobile?.();
+                            router.post('/logout');
                         }}
                         className="flex items-center gap-3 w-full px-4 py-3 rounded-2xl transition-all duration-300 ease-out font-medium hover:bg-white/10 text-[rgba(255,255,255,0.7)] hover:text-white"
                     >

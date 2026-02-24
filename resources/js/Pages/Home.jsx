@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import {
     IconCheck, IconLayoutDashboard, IconUsers, IconBrandSpeedtest,
@@ -6,6 +6,9 @@ import {
 } from '@tabler/icons-react';
 
 export default function Home() {
+    const { auth } = usePage().props;
+    const user = auth?.user;
+
     const words = ['emails', 'tickets', 'workflow'];
     const [wordIndex, setWordIndex] = useState(0);
 
@@ -35,15 +38,26 @@ export default function Home() {
                 </div>
 
                 <div className="flex items-center gap-3 md:gap-4">
-                    <Link href="/login" className="text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors">
-                        Log in
-                    </Link>
-                    <Link
-                        href="/register"
-                        className="px-4 py-2 md:px-5 md:py-2.5 text-sm font-bold text-white transition-all duration-300 rounded-full bg-gray-900 hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/30 active:scale-95"
-                    >
-                        Start for free
-                    </Link>
+                    {user ? (
+                        <Link
+                            href="/dashboard"
+                            className="px-4 py-2 md:px-5 md:py-2.5 text-sm font-bold text-white transition-all duration-300 rounded-full bg-gray-900 hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/30 active:scale-95"
+                        >
+                            Go to workspace →
+                        </Link>
+                    ) : (
+                        <>
+                            <Link href="/login" className="text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors">
+                                Log in
+                            </Link>
+                            <Link
+                                href="/register"
+                                className="px-4 py-2 md:px-5 md:py-2.5 text-sm font-bold text-white transition-all duration-300 rounded-full bg-gray-900 hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/30 active:scale-95"
+                            >
+                                Start for free
+                            </Link>
+                        </>
+                    )}
                 </div>
             </nav>
 
@@ -89,10 +103,10 @@ export default function Home() {
 
                     <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                         <Link
-                            href="/register"
+                            href={user ? '/dashboard' : '/register'}
                             className="w-full sm:w-auto px-8 py-4 text-base font-bold text-white transition-all duration-300 rounded-full shadow-xl bg-gray-900 shadow-gray-900/20 hover:bg-indigo-600 hover:shadow-indigo-500/30 active:scale-95"
                         >
-                            Get Started Free
+                            {user ? 'Go to your workspace →' : 'Get Started Free'}
                         </Link>
                         <a
                             href="#features"
@@ -137,7 +151,7 @@ export default function Home() {
                     <p className="text-sm font-semibold tracking-wider text-gray-400 uppercase mb-8">
                         Trusted by innovative teams worldwide
                     </p>
-                    <div className="flex flex-wrap justify-center gap-10 md:gap-20 opacity-40 grayscale">
+                    <div className="flex flex-wrap justify-center gap-10 md:gap-20 o    pacity-40 grayscale">
                         {/* Dummy Logos */}
                         <div className="text-xl font-black font-serif">Acme Corp</div>
                         <div className="text-xl font-bold tracking-tighter">GLOBAL<span className="font-light">sys</span></div>
@@ -344,10 +358,10 @@ export default function Home() {
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
                         <Link
-                            href="/register"
+                            href={user ? '/dashboard' : '/register'}
                             className="w-full sm:w-auto px-8 py-4 text-lg font-bold text-gray-900 transition-transform rounded-full bg-white hover:scale-105 active:scale-95 shadow-xl shadow-white/10"
                         >
-                            Start your 14-day free trial
+                            {user ? 'Go to your workspace →' : 'Start your 14-day free trial'}
                         </Link>
                         <p className="text-sm text-gray-400 sm:hidden">No credit card required</p>
                     </div>
