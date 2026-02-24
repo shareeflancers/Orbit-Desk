@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import { Link } from '@inertiajs/react';
 
 /**
  * AuthButton — Reusable button with multiple variants matching the glass/rounded UI aesthetic.
@@ -65,8 +66,11 @@ const AuthButton = forwardRef(({
 
     const widthStyle = fullWidth ? 'w-full' : '';
 
+    // If href is passed, render an Inertia Link instead of a generic button
+    const Component = props.href ? Link : 'button';
+
     return (
-        <button
+        <Component
             ref={ref}
             disabled={disabled || isLoading}
             className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${widthStyle} ${className}`}
@@ -79,7 +83,7 @@ const AuthButton = forwardRef(({
                 </svg>
             ) : null}
             {children}
-        </button>
+        </Component>
     );
 });
 

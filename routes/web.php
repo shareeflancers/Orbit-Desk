@@ -41,9 +41,11 @@ Route::middleware('auth')->group(function () {
         ->name('verification.send');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 });
 
 // Protected routes (auth + verified)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', fn () => Inertia::render('Dashboard'))->name('dashboard');
+    Route::post('/api/user/profile-pic', [\App\Http\Controllers\UserController::class, 'updateProfilePic']);
 });

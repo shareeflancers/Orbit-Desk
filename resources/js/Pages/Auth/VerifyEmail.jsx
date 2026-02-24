@@ -54,11 +54,17 @@ export default function VerifyEmail({ email, status }) {
                             </AuthButton>
                         </form>
 
-                        <Link href="/logout" method="post" as="button" className="flex-1">
-                            <AuthButton variant="outline" size="md" fullWidth>
-                                Log out
-                            </AuthButton>
-                        </Link>
+                        <AuthButton
+                            href="/logout"
+                            method="post"
+                            as="button"
+                            variant="outline"
+                            size="md"
+                            fullWidth
+                            className="flex-1"
+                        >
+                            Log out
+                        </AuthButton>
                     </div>
                 </div>
             </AuthLayout>
