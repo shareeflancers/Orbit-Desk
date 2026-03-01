@@ -59,7 +59,7 @@ export default function Sidebar({
             {/* Sidebar Container - Floaty style */}
             <aside
                 className={`
-                    fixed top-4 left-4 z-[70] h-[calc(100vh-32px)] w-[260px] flex flex-col p-4
+                    fixed top-4 left-4 z-[70] h-[calc(100vh-32px)] w-[285px] flex flex-col p-4
                     transition-transform duration-300 ease-in-out lg:translate-x-0
                     border border-gray-100 shadow-xl shadow-gray-200/50 rounded-3xl bg-white
                     ${openMobile ? 'translate-x-0' : '-translate-x-[120%]'}

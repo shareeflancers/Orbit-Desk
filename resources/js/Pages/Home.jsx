@@ -1,8 +1,8 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, usePage, router } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import {
     IconCheck, IconLayoutDashboard, IconUsers, IconBrandSpeedtest,
-    IconChartBar, IconMessageCircle, IconShieldCheck, IconMail, IconKey, IconServer
+    IconChartBar, IconMessageCircle, IconShieldCheck, IconMail, IconKey, IconServer, IconBrandWhatsapp, IconSend, IconRocket, IconHeartHandshake, IconCoin
 } from '@tabler/icons-react';
 
 export default function Home() {
@@ -11,6 +11,23 @@ export default function Home() {
 
     const words = ['emails', 'tickets', 'workflow'];
     const [wordIndex, setWordIndex] = useState(0);
+
+    const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' });
+    const [contactStatus, setContactStatus] = useState('');
+
+    const handleContactSubmit = (e) => {
+        e.preventDefault();
+        setContactStatus('sending');
+        router.post('/contact', contactForm, {
+            preserveScroll: true,
+            onSuccess: () => {
+                setContactForm({ name: '', email: '', message: '' });
+                setContactStatus('success');
+                setTimeout(() => setContactStatus(''), 5000);
+            },
+            onError: () => setContactStatus('error')
+        });
+    };
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -34,7 +51,10 @@ export default function Home() {
 
                 <div className="hidden md:flex items-center gap-8 font-medium text-sm text-gray-600">
                     <a href="#features" className="hover:text-indigo-600 transition-colors">Features</a>
+                    <a href="#why-us" className="hover:text-indigo-600 transition-colors">Why Us</a>
                     <a href="#pricing" className="hover:text-indigo-600 transition-colors">Pricing</a>
+                    <a href="#about-us" className="hover:text-indigo-600 transition-colors">About</a>
+                    <a href="#contact" className="hover:text-indigo-600 transition-colors">Contact</a>
                 </div>
 
                 <div className="flex items-center gap-3 md:gap-4">
@@ -116,7 +136,7 @@ export default function Home() {
                         </a>
                     </div>
 
-                    <p className="mt-6 text-sm text-gray-400 font-medium">No credit card required • 14-day free trial</p>
+                    <p className="mt-6 text-sm text-gray-400 font-medium">No credit card required • 90-day free trial</p>
 
                     {/* Dashboard Mockup Visualization */}
                     <div className="relative mt-20 md:mt-28 mx-auto -mb-10 lg:-mb-32">
@@ -228,6 +248,39 @@ export default function Home() {
                 </div>
             </section>
 
+            {/* ── Why Select Us ── */}
+            <section id="why-us" className="py-24 md:py-32 bg-indigo-50 border-t border-indigo-100/50">
+                <div className="container px-6 mx-auto max-w-6xl">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-5xl font-extrabold text-indigo-950 mb-6 tracking-tight">Why Select Orbit Desk?</h2>
+                        <p className="text-lg text-indigo-700/80">We believe that powerful communication tools shouldn't come with a massive price tag. Here is our value proposition.</p>
+                    </div>
+                    <div className="grid gap-8 md:grid-cols-3">
+                        <div className="p-8 bg-white rounded-[2rem] shadow-sm border border-indigo-100/50 hover:-translate-y-2 transition-transform duration-300">
+                            <div className="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-6">
+                                <IconCoin size={24} />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-3">Cost-Effective Alternative</h3>
+                            <p className="text-gray-500 leading-relaxed">Stop paying per-agent fees that cripple your growth. We offer transparent pricing that saves you thousands compared to traditional helpdesks.</p>
+                        </div>
+                        <div className="p-8 bg-white rounded-[2rem] shadow-sm border border-indigo-100/50 hover:-translate-y-2 transition-transform duration-300">
+                            <div className="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6">
+                                <IconHeartHandshake size={24} />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-3">Customer-First Support</h3>
+                            <p className="text-gray-500 leading-relaxed">We actually care about your success. You get direct access to our team to ensure Orbit Desk perfectly fits your workflow needs.</p>
+                        </div>
+                        <div className="p-8 bg-white rounded-[2rem] shadow-sm border border-indigo-100/50 hover:-translate-y-2 transition-transform duration-300">
+                            <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-6">
+                                <IconRocket size={24} />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-3">Built for Speed</h3>
+                            <p className="text-gray-500 leading-relaxed">Our minimalist, blazing-fast interface means less time clicking around and more time actually resolving customer inquiries.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* ── Pricing Tiers ── */}
             <section id="pricing" className="py-24 md:py-32 bg-gray-50 border-t border-gray-100">
                 <div className="container px-6 mx-auto max-w-7xl">
@@ -241,7 +294,7 @@ export default function Home() {
                         {/* Tier 1: Free */}
                         <div className="flex flex-col p-8 bg-white border border-gray-200 rounded-[2rem] shadow-sm hover:shadow-xl hover:border-indigo-100 transition-all duration-300">
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Free</h3>
-                            <p className="text-sm text-gray-500 mb-6 font-medium text-amber-600">First 3 months.</p>
+                            <p className="text-sm text-gray-500 mb-6 font-medium text-amber-600">First 3 months. No credit card required.</p>
                             <div className="mb-8">
                                 <span className="text-4xl font-extrabold text-gray-900">$0</span>
                                 <span className="text-gray-500 font-medium">/mo</span>
@@ -361,21 +414,108 @@ export default function Home() {
                             href={user ? '/dashboard' : '/register'}
                             className="w-full sm:w-auto px-8 py-4 text-lg font-bold text-gray-900 transition-transform rounded-full bg-white hover:scale-105 active:scale-95 shadow-xl shadow-white/10"
                         >
-                            {user ? 'Go to your workspace →' : 'Start your 14-day free trial'}
+                            {user ? 'Go to your workspace →' : 'Start your 90-day free trial'}
                         </Link>
                         <p className="text-sm text-gray-400 sm:hidden">No credit card required</p>
                     </div>
 
                     <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm font-medium text-gray-300">
                         <div className="flex items-center gap-2">
-                            <IconCheck size={18} className="text-green-400" /> Free 14-day trial
+                            <IconCheck size={18} className="text-green-400" /> Free 90-day trial
                         </div>
                         <div className="flex items-center gap-2">
-                            <IconCheck size={18} className="text-green-400" /> Cancel anytime
+                            <IconCheck size={18} className="text-green-400" /> Upgrade anytime
                         </div>
                         <div className="flex items-center gap-2">
                             <IconCheck size={18} className="text-green-400" /> No credit card required
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── About Us ── */}
+            <section id="about-us" className="py-24 md:py-32 bg-white">
+                <div className="container px-6 mx-auto max-w-5xl">
+                    <div className="flex flex-col md:flex-row items-center gap-16">
+                        <div className="flex-1">
+                            <div className="relative">
+                                <div className="absolute -inset-4 bg-gradient-to-tr from-indigo-100 to-purple-50 rounded-[3rem] -z-10 transform -rotate-3"></div>
+                                <div className="bg-white border border-gray-100 rounded-[2.5rem] p-8 shadow-xl">
+                                    <div className="w-20 h-20 bg-indigo-600 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-indigo-500/30">
+                                        <IconUsers size={40} />
+                                    </div>
+                                    <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
+                                    <p className="text-gray-600 leading-relaxed">
+                                        Orbit Desk was built with a simple premise: smaller teams deserve enterprise-grade ticketing without the suffocating subscription fees. We started out of frustration with bloated software that took months to configure and cost a fortune. Today, our goal is to empower businesses with an intuitive, hyper-fast helpdesk that scales with your ambition, prioritizing what really matters—your customers.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex-1">
+                            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">About Us</h2>
+                            <p className="text-lg text-gray-500 mb-8">
+                                We are a passionate team of developers and product designers dedicated to streamlining communication. We believe in simplicity, transparency, and creating software that gets out of your way. Our suite of powerful tools makes it effortless to provide stellar support.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Contact Info ── */}
+            <section id="contact" className="py-24 md:py-32 bg-gray-50 border-t border-gray-100">
+                <div className="container px-6 mx-auto max-w-4xl">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">Get in touch</h2>
+                        <p className="text-lg text-gray-500">Have questions? Send us a message and we'll reply as soon as possible.</p>
+                    </div>
+                    <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-xl border border-gray-100 hover:shadow-2xl transition-shadow duration-500">
+                        <form onSubmit={handleContactSubmit} className="space-y-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Your Name</label>
+                                    <input
+                                        type="text"
+                                        required
+                                        value={contactForm.name}
+                                        onChange={e => setContactForm({ ...contactForm, name: e.target.value })}
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition-colors"
+                                        placeholder="John Doe"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                    <input
+                                        type="email"
+                                        required
+                                        value={contactForm.email}
+                                        onChange={e => setContactForm({ ...contactForm, email: e.target.value })}
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition-colors"
+                                        placeholder="john@example.com"
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                                <textarea
+                                    required
+                                    value={contactForm.message}
+                                    onChange={e => setContactForm({ ...contactForm, message: e.target.value })}
+                                    rows="5"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 transition-colors resize-none"
+                                    placeholder="How can we help you?"
+                                ></textarea>
+                            </div>
+                            <button
+                                type="submit"
+                                disabled={contactStatus === 'sending'}
+                                className="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold text-lg hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-70 active:scale-95 duration-200"
+                            >
+                                {contactStatus === 'sending' ? 'Sending...' : contactStatus === 'success' ? 'Message Sent!' : <><IconSend size={20} /> Send Message</>}
+                            </button>
+                            {contactStatus === 'error' && (
+                                <p className="text-red-500 text-sm text-center mt-2 font-medium">Failed to send message. Please try again.</p>
+                            )}
+                        </form>
                     </div>
                 </div>
             </section>
@@ -390,10 +530,10 @@ export default function Home() {
                         <span className="text-base font-bold text-gray-900 tracking-tight">Orbit Desk</span>
                     </div>
 
-                    <div className="flex items-center gap-6 text-sm font-medium text-gray-500">
-                        <a href="#" className="hover:text-gray-900">Privacy Policy</a>
-                        <a href="#" className="hover:text-gray-900">Terms of Service</a>
-                        <a href="#" className="hover:text-gray-900">Contact Sales</a>
+                    <div className="flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-gray-500">
+                        <Link href="/privacy-policy" className="hover:text-gray-900 transition-colors">Privacy Policy</Link>
+                        <Link href="/terms-of-condition" className="hover:text-gray-900 transition-colors">Terms of Condition</Link>
+                        <a href="#contact" className="hover:text-gray-900 transition-colors">Contact Sales</a>
                     </div>
 
                     <p className="text-sm text-gray-400">
@@ -401,6 +541,17 @@ export default function Home() {
                     </p>
                 </div>
             </footer>
+
+            {/* WhatsApp Floaty Button */}
+            <a
+                href="https://wa.me/923120576877"
+                target="_blank"
+                rel="noreferrer"
+                className="fixed bottom-6 lg:bottom-10 right-6 lg:right-10 z-[100] w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_8px_30px_rgb(37,211,102,0.4)] hover:scale-110 hover:-translate-y-1 active:scale-95 transition-all duration-300"
+                aria-label="Contact us on WhatsApp"
+            >
+                <IconBrandWhatsapp size={32} stroke={2} />
+            </a>
         </div>
     );
 }

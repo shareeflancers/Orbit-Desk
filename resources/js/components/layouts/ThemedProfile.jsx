@@ -130,7 +130,7 @@ export default function ThemedProfile({ user }) {
             {/* Profile Floaty Sidebar */}
             <aside
                 className={`
-                    fixed top-4 right-4 z-[70] h-[calc(100vh-32px)] w-[280px] flex flex-col p-5
+                    fixed top-4 right-4 z-[70] h-[calc(30vh-32px)] w-[285px] flex flex-col p-5
                     transition-transform duration-300 ease-in-out
                     border border-gray-100 shadow-xl shadow-gray-200/50 rounded-3xl bg-white
                     ${drawerOpened ? 'translate-x-0' : 'translate-x-[120%]'}

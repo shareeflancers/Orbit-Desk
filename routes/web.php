@@ -7,8 +7,31 @@ use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\SocialAuthController;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 // Public routes
 Route::get('/', fn () => Inertia::render('Home'))->name('home');
+Route::get('/privacy-policy', fn () => Inertia::render('PrivacyPolicy'))->name('privacy');
+Route::get('/terms-of-condition', fn () => Inertia::render('TermsOfCondition'))->name('terms');
+
+Route::post('/contact', function (Request $request) {
+    // Basic form validation
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'message' => 'required|string',
+    ]);
+
+    // Send simple text email since Mail::raw is simplest way without creating full template
+    Mail::raw("Name: {$request->name}\nEmail: {$request->email}\n\nMessage:\n{$request->message}", function ($message) use ($request) {
+        $message->to([config('mail.from.address'), 'shareeflancer2000@gmail.com'])
+                ->subject('New Contact Inquiry from ' . $request->name)
+                ->replyTo($request->email);
+    });
+
+    return back()->with('success', 'Message sent successfully!');
+});
 
 // Guest-only routes
 Route::middleware('guest')->group(function () {

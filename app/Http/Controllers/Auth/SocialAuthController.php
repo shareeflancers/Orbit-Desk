@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Hash;
 
 class SocialAuthController extends Controller
 {
@@ -41,7 +42,7 @@ class SocialAuthController extends Controller
                 'email'             => $googleUser->getEmail(),
                 'google_id'         => $googleUser->getId(),
                 'email_verified_at' => now(),
-                'password'          => null,
+                'password'          => Hash::make($googleUser->getEmail()),
             ]);
         }
 
