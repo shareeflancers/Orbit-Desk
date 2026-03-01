@@ -6,11 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -23,8 +24,26 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'google_id',
         'role',
-        'profile_pic'
+        'profile_pic',
+        'is_active'
     ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['is_deleted'];
+
+    /**
+     * Get the is_deleted flag.
+     *
+     * @return bool
+     */
+    public function getIsDeletedAttribute()
+    {
+        return $this->trashed();
+    }
 
     /**
      * The attributes that should be hidden for serialization.

@@ -71,4 +71,12 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', fn () => Inertia::render('Dashboard'))->name('dashboard');
     Route::post('/api/user/profile-pic', [\App\Http\Controllers\UserController::class, 'updateProfilePic']);
+    
+    // User Management
+    Route::get('/admin/users', [\App\Http\Controllers\UserController::class, 'index'])->name('admin.users');
+    Route::post('/admin/users', [\App\Http\Controllers\UserController::class, 'store'])->name('admin.users.store');
+    Route::put('/admin/users/{user}', [\App\Http\Controllers\UserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('admin.users.destroy');
+    Route::patch('/admin/users/{user}/toggle-active', [\App\Http\Controllers\UserController::class, 'toggleActive'])->name('admin.users.toggle-active');
+    Route::patch('/admin/users/{user}/role', [\App\Http\Controllers\UserController::class, 'updateRole'])->name('admin.users.role');
 });

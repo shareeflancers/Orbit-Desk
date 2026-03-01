@@ -48,6 +48,6 @@ class SocialAuthController extends Controller
 
         Auth::login($user, remember: true);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('success', 'Successfully authenticated with Google.');
     }
 }

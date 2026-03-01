@@ -5,18 +5,22 @@ import { usePage } from '@inertiajs/react';
 import Sidebar from './Sidebar';
 import ThemeAdjustmentPanel from '../themed/ThemeAdjustmentPanel';
 import ThemedProfile from './ThemedProfile';
+import FlashMessages from '../themed/FlashMessages';
+import ThemedAnnouncementBar from '../themed/ThemedAnnouncementBar';
 
 /**
  * DashboardLayout — full-page shell with a floating sidebar and removed header.
  * The theme settings button is now a floating glassmorphism icon on the bottom right.
  *
  * Props:
- *   children, activeNavId, onNavigate
+ *   children, activeNavId, onNavigate, title, description
  */
 export default function DashboardLayout({
     children,
     activeNavId = 'dashboard',
     onNavigate,
+    title,
+    description,
 }) {
     const { auth } = usePage().props;
     const [themeDrawerOpen, setThemeDrawerOpen] = useState(false);
@@ -27,6 +31,8 @@ export default function DashboardLayout({
             className="flex min-h-screen text-gray-800 transition-colors duration-500"
             style={{ background: 'var(--od-surface)' }}
         >
+            <FlashMessages />
+
             {/* Theme Drawer */}
             <ThemeAdjustmentPanel
                 opened={themeDrawerOpen}
@@ -56,13 +62,22 @@ export default function DashboardLayout({
                         <div className="font-bold text-gray-800">Orbit Desk</div>
                     </div>
 
-                    <div className="flex items-center gap-4 z-[60]">
+                    <div className="flex items-center gap-4 z-[60] flex-1 justify-end min-w-0">
+                        <ThemedAnnouncementBar />
                         <ThemedProfile user={auth?.user || {}} />
                     </div>
                 </div>
 
                 {/* ── Page Content ── */}
                 <main className="flex-1 p-4 md:p-8 w-full max-w-[1600px] mx-auto">
+                    {/* Optional Page Header */}
+                    {(title || description) && (
+                        <div className="mb-6 lg:mb-8">
+                            {title && <h1 className="text-2xl font-bold text-gray-900 md:text-3xl">{title}</h1>}
+                            {description && <p className="mt-1 text-sm text-gray-500 md:text-base">{description}</p>}
+                        </div>
+                    )}
+
                     {children}
                 </main>
             </div>

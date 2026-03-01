@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard'));
+        return redirect()->intended(route('dashboard'))->with('success', 'Logged in successfully.');
     }
 
     public function showRegister()
@@ -58,7 +58,7 @@ class AuthController extends Controller
 
         $user->sendEmailVerificationNotification();
 
-        return redirect()->route('verification.notice');
+        return redirect()->route('verification.notice')->with('success', 'Registration successful. Please check your email to verify your account.');
     }
 
     public function logout(Request $request)
@@ -68,6 +68,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success', 'Logged out successfully.');
     }
 }

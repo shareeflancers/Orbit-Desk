@@ -99,8 +99,15 @@ export default function Sidebar({
                                 label={item.label}
                                 active={activeId === item.id}
                                 onClick={() => {
-                                    onNavigate?.(item.id);
-                                    onCloseMobile?.();
+                                    if (item.path) {
+                                        router.get(item.path);
+                                    }
+                                    if (onNavigate) {
+                                        onNavigate(item.id);
+                                    }
+                                    if (onCloseMobile) {
+                                        onCloseMobile();
+                                    }
                                 }}
                             />
                         ))}
